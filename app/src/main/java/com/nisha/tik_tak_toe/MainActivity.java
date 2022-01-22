@@ -31,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
         if(gameState[tappedCounter]== -1 && gameActive) { // else if the user taps again the next color coin changes
+
             gameState[tappedCounter] = activePlayer;
+
             counter.setTranslationY(-1500);
+
             if (activePlayer == 0) {
                 counter.setImageResource(R.drawable.yellow);
                 activePlayer = 1;
@@ -45,10 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
             for (int[] winningPosition : winningPositions) {
                 //check if 3 positions of the gamestate is of the same person
-                if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
-                        gameState[winningPosition[1]] == gameState[winningPosition[2]] && gameState[winningPosition[0]] != -1) {
+                if (gameState[winningPosition[0]] == gameState[winningPosition[1]] && gameState[winningPosition[1]] == gameState[winningPosition[2]]  && gameState[winningPosition[0]] != -1) {
                     //someone has won;
-                    String gameResultTextView;
+                    String gameResultTextView="";
                     gameActive = false;
                     if (activePlayer == 1) {
                         gameResultTextView = "YELLOW IS THE WINNER";
@@ -56,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
                     else if(activePlayer == 0) {
                         gameResultTextView = "RED IS THE WINNER";
                     }
-                    else{
-                        gameResultTextView =" IT'S A DRAW";
-                    }
-
                     textViewWinnerAnnouncer.setText(gameResultTextView);
                     buttonPlayAgain.setVisibility(View.VISIBLE);
                     textViewWinnerAnnouncer.setVisibility(View.VISIBLE);
