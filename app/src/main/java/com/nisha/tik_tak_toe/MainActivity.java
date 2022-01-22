@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView counter = (ImageView) view;
         TextView textViewWinnerAnnouncer = (TextView) findViewById(R.id.textViewWinner);
         Button buttonPlayAgain = (Button) findViewById(R.id.buttonPlayAgain);
+
         int tappedCounter = Integer.parseInt(counter.getTag().toString());
 
-        if(tappedCounter!=-1 && gameActive) { // else if the user taps again the next color coin changes
+        if(gameState[tappedCounter]== -1 && gameActive) { // else if the user taps again the next color coin changes
             gameState[tappedCounter] = activePlayer;
             counter.setTranslationY(-1500);
             if (activePlayer == 0) {
@@ -44,20 +45,24 @@ public class MainActivity extends AppCompatActivity {
 
             for (int[] winningPosition : winningPositions) {
                 //check if 3 positions of the gamestate is of the same person
-                if (gameState[winningPosition[0]] != -1 && gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
-                        gameState[winningPosition[1]] == gameState[winningPosition[2]]
-                        ) {
+                if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
+                        gameState[winningPosition[1]] == gameState[winningPosition[2]] && gameState[winningPosition[0]] != -1) {
                     //someone has won;
-                    String winner;
+                    String gameResultTextView;
+                    gameActive = false;
                     if (activePlayer == 1) {
-                        winner = "YELLOW";
-                    } else {
-                        winner = "RED";
+                        gameResultTextView = "YELLOW IS THE WINNER";
                     }
-                    textViewWinnerAnnouncer.setText(winner+" IS THE WINNER");
+                    else if(activePlayer == 0) {
+                        gameResultTextView = "RED IS THE WINNER";
+                    }
+                    else{
+                        gameResultTextView =" IT'S A DRAW";
+                    }
+
+                    textViewWinnerAnnouncer.setText(gameResultTextView);
                     buttonPlayAgain.setVisibility(View.VISIBLE);
                     textViewWinnerAnnouncer.setVisibility(View.VISIBLE);
-                    gameActive = false;
 
                 }//end if
             }// end for
@@ -67,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
     public void playAgain(View view){
         TextView textViewWinnerAnnouncer = (TextView) findViewById(R.id.textViewWinner);
         Button buttonPlayAgain = (Button) findViewById(R.id.buttonPlayAgain);
+
         buttonPlayAgain.setVisibility(View.INVISIBLE);
-        textViewWinnerAnnouncer.setText("");
+        //textViewWinnerAnnouncer.setText("");
         textViewWinnerAnnouncer.setVisibility(View.INVISIBLE);
 
         GridLayout gridLayoutBoard = (GridLayout) findViewById(R.id.gridLayout);
@@ -84,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         activePlayer = 0;
         gameActive = true;
-
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
