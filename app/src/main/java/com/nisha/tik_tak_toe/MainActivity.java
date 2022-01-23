@@ -18,9 +18,7 @@ public class MainActivity extends AppCompatActivity {
     int[] gameState = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
     int activePlayer = 0;
     boolean gameActive = true;
-    int[][] winningPositions = {{0,1,2},{2,3,4},{5,6,7},
-            {0,3,6},{1,4,7},{2,5,8},
-            {0,4,8},{2,4,6}};
+    int[][] winningPositions = {{0,1,2},{2,3,4},{5,6,7},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
 
 
     public void dropIn (View view){
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     if (activePlayer == 1) {
                         gameResultTextView = "YELLOW IS THE WINNER";
                     }
-                    else if(activePlayer == 0) {
+                    else{
                         gameResultTextView = "RED IS THE WINNER";
                     }
                     textViewWinnerAnnouncer.setText(gameResultTextView);
@@ -82,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
             counter.setImageDrawable(null);
         }
 
-        for(int element :gameState){
-                element=-1;
+        for(int i=0;i<gameState.length;i++){
+                gameState[i]=-1;
         }// now gameState = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 
         activePlayer = 0;
