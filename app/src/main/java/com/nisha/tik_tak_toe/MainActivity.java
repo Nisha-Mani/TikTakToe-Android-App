@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
             for (int[] winningPosition : winningPositions) {
                 //check if 3 positions of the gamestate is of the same person
+                String gameResultTextView="";
                 if (gameState[winningPosition[0]] == gameState[winningPosition[1]] && gameState[winningPosition[1]] == gameState[winningPosition[2]]  && gameState[winningPosition[0]] != -1) {
                     //someone has won;
-                    String gameResultTextView="";
                     gameActive = false;
                     if (activePlayer == 1) {
                         gameResultTextView = "YELLOW IS THE WINNER";
